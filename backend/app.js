@@ -1,7 +1,7 @@
 const express = require('express');
 
 const app = express();
-
+const userRoutes = require('./routes/user');
 /* app.use((req,res,next) => {
     console.log("Requete recue");
     next();
@@ -22,9 +22,9 @@ app.use((req,res)=>{
 // connexion a mongodb en ligne sur le cluster
 
 
-const Thing = require('./models/Thing');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const stuffRoutes = require('./routes/stuff'); 
 app.use(bodyParser.json())
 mongoose.connect('mongodb+srv://kouemo_mongodb:pP9PXtuEeunGFe3@cluster0.iqowh.mongodb.net/testOpenclassroom?retryWrites=true&w=majority',
 {
@@ -64,5 +64,6 @@ app.use('/api/stuff', (req, res, next) => {
   }); */
 
 
-
+app.use('/api/stuff',stuffRoutes);
+app.use('/api/auth',userRoutes);
 module.exports = app;
